@@ -1,0 +1,69 @@
+services:
+  app:
+    build:
+      context: ./app  # Ensure your application code is in the ./app directory
+      dockerfile: Dockerfile  # Use a Dockerfile to configure your app
+    container_name: app
+    environment:
+      -  MONGO_URI=mongodb://root:example@mongo:27017/
+      - QDRANT_URL=http://qdrant:6333
+      - CLEARML_API_HOST=https://api.clear.ml  # ClearML hosted service
+      - CLEARML_API_ACCESS_KEY=TIL78E0B086FLLDS68A4WW37052NPC
+      - CLEARML_API_SECRET_KEY=xw73xLVjyrJ1z034S8xV-VVKATfqo0vWqiubO6TpTPdZB_W5SRX5ewfMlTf1etoSazQ
+      - HUGGINGFACE_HUB=https://huggingface.co
+      - HF_TOKEN=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
+    ports:
+      - "8000:8000"  # Expose your app's port
+    depends_on:
+      - mongo
+      - qdrant
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    environment:
+      - QDRANT__HOST=0.0.0.0
+      - QDRANT__PORT=6333
+    volumes:
+      - qdrant_data:/qdrant/storage
+    ports:
+      - "6333:6333"
+    networks:
+      - app-network
+
+  gradio-app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: python3 gradio_app.py
+    container_name: gradio-app
+    ports:
+      - "7860:7860"
+    networks:
+      - app-network
+      
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+    driver: local
+  qdrant_data:
+    driver: local
