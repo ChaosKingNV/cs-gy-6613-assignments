@@ -11,40 +11,40 @@ We have fine-tuned a text-generation model for answering questions related to RO
 ## Project File Structure
 
 ```
-RAG-Project/
+Project/
 ├── app/                   # Main application directory
-│   ├── app.py             # FastAPI application for API services
-│   ├── gradio_app.py      # Gradio application for user interface
-│   ├── Dockerfile         # Dockerfile for container setup
-│   ├── requirements.txt   # Python dependencies
-│   └── docker-compose.yml # Docker Compose configuration
-│
-├── etl/                   # ETL Pipeline for data extraction
-│   ├── etl_pipeline.py    # Main ETL logic
-│   └── config.py          # ETL configuration
-│
-├── featurization/         # Data featurization pipeline
-│   ├── featurizer.py      # Vector embedding generation
-│   ├── featurization_pipeline.py
-│   └── config.py          # Featurization config
-│
-├── youtube_pipeline/      # YouTube data extraction and labeling
-│   ├── youtube_transcript_collector.py
-│   ├── question_answer_generator.py
-│   └── config.py
-│
-├── finetuning/            # Model fine-tuning pipeline
-│   ├── data_preprocessor.py
-│   ├── model_trainer.py
-│   ├── upload_to_hub.py
-│   ├── config.py          # Fine-tuning configuration
-│   └── clearml_tracker.py
-│
-├── clearml_integration/   # ClearML integration for experiment tracking
-│   └── clearml_tracker.py
-│
-└── static/                # Static files and assets
-    └── ...
+    ├── app.py             # FastAPI application for API services
+    ├── gradio_app.py      # Gradio application for user interface
+    ├── Dockerfile         # Dockerfile for container setup
+    ├── requirements.txt   # Python dependencies
+    └── docker-compose.yml # Docker Compose configuration
+    │
+    ├── etl/                   # ETL Pipeline for data extraction
+    │   ├── etl_pipeline.py    # Main ETL logic
+    |   └── config.py          # ETL configuration
+    │
+    ├── featurization/         # Data featurization pipeline
+    │   ├── featurizer.py      # Vector embedding generation
+    │   ├── featurization_pipeline.py
+    │   └── config.py          # Featurization config
+    │
+    ├── youtube_pipeline/      # YouTube data extraction and labeling
+    │   ├── youtube_transcript_collector.py
+    │   ├── question_answer_generator.py
+    │   └── config.py
+    │
+    ├── finetuning/            # Model fine-tuning pipeline
+    │   ├── data_preprocessor.py
+    │   ├── model_trainer.py
+    │   ├── upload_to_hub.py
+    │   ├── config.py          # Fine-tuning configuration
+    │   └── clearml_tracker.py
+    │
+    ├── clearml_integration/   # ClearML integration for experiment tracking
+    │   └── clearml_tracker.py
+    │
+    └── static/                # Static files and assets
+        └── ...
 ```
 
 ---
